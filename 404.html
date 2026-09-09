@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>404 · 雨里走散了</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Zhi+Mang+Xing&family=Noto+Serif+SC:wght@300;400&family=Shippori+Mincho:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .lost { min-height: 100vh; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding: 0 8vw; position: relative; z-index: 4; }
+    .lost .code { font-family:"Zhi Mang Xing", cursive; font-size: clamp(5rem, 20vw, 12rem); color: var(--cream); line-height:1; text-shadow:0 2px 30px rgba(232,168,96,.3); margin:0; }
+    .lost p { color: var(--muted); font-weight:300; line-height:2; margin: 18px 0 32px; }
+  </style>
+</head>
+<body>
+  <canvas id="rain"></canvas>
+  <div class="grain"></div>
+  <div class="vignette"></div>
+  <div class="lamp-glow"></div>
+  <div class="lost">
+    <p class="kicker" style="margin:0 0 6px;">page not found</p>
+    <h1 class="code">404</h1>
+    <p>这一页在雨里走散了。<br />要不回小屋，重新煮杯咖啡？</p>
+    <a class="link" href="/">← 回到首页</a>
+  </div>
+  <script>
+  (function(){var c=document.getElementById("rain"),x=c.getContext("2d"),w,h,d;
+  function rs(){w=c.width=innerWidth;h=c.height=innerHeight;d=Array.from({length:Math.min(200,w/6|0)},mk);}
+  function mk(){return{x:Math.random()*w,y:Math.random()*h,l:8+Math.random()*16,s:4+Math.random()*6,a:.1+Math.random()*.3};}
+  function f(){x.clearRect(0,0,w,h);for(var p of d){x.strokeStyle="rgba(240,210,170,"+p.a+")";x.lineWidth=.8;x.beginPath();x.moveTo(p.x,p.y);x.lineTo(p.x-p.l*.15,p.y+p.l);x.stroke();p.y+=p.s;p.x-=p.s*.15;if(p.y>h){p.y=-p.l;p.x=Math.random()*w;}}requestAnimationFrame(f);}
+  addEventListener("resize",rs);rs();f();})();
+  </script>
+</body>
+</html>

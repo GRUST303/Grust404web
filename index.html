@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Grust · 雨夜小屋</title>
+  <meta name="description" content="森系原木 · 日系 · 爵士 lofi 雨夜风格的个人主页" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Zhi+Mang+Xing&family=Noto+Serif+SC:wght@300;400;600&family=Shippori+Mincho:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- 雨滴层 -->
+  <canvas id="rain"></canvas>
+  <!-- 暖光/颗粒/暗角 -->
+  <div class="grain"></div>
+  <div class="vignette"></div>
+  <div class="lamp-glow"></div>
+
+  <!-- 顶部工具条 -->
+  <header class="topbar">
+    <span class="brand">珈琲店 · <em>coffee & rain</em></span>
+    <button id="audioToggle" class="audio-btn" aria-pressed="false" title="播放/暂停 雨声 lofi">
+      <span class="eq"><i></i><i></i><i></i><i></i></span>
+      <span class="audio-label">雨声 off</span>
+    </button>
+  </header>
+
+  <main class="stage">
+    <section class="hero">
+      <p class="kicker">rainy night · lofi jazz · 森系原木</p>
+      <h1 class="title">在雨里，慢慢来</h1>
+      <p class="subtitle">
+        一间只有雨声、黑胶与暖灯的小屋。<br />
+        这里放着我做的东西、写的字，和一些安静的念头。
+      </p>
+      <div class="links">
+        <a class="link" href="#about">关于我</a>
+        <a class="link" href="#works">作品</a>
+        <a class="link" href="#contact">联系</a>
+      </div>
+      <div class="scroll-hint">向下滚动 ↓</div>
+    </section>
+
+    <section id="about" class="panel">
+      <div class="panel-card">
+        <h2><span class="jp">窓辺</span> 关于我</h2>
+        <p>
+          你好，我是 <strong>Grust</strong>。喜欢在雨夜里泡一杯手冲，
+          听着爵士 lofi 敲代码。这个小站用来记录一些作品、笔记与心情。
+        </p>
+        <ul class="tags">
+          <li>咖啡</li><li>黑胶</li><li>写代码</li><li>下雨天</li><li>森系</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="works" class="panel">
+      <div class="panel-card">
+        <h2><span class="jp">作品</span> 我做的东西</h2>
+        <div class="works-grid">
+          <a class="work" href="#">
+            <span class="work-emoji">☕</span>
+            <span class="work-title">项目一</span>
+            <span class="work-desc">一段简短的介绍，替换成你的项目。</span>
+          </a>
+          <a class="work" href="#">
+            <span class="work-emoji">🎧</span>
+            <span class="work-title">项目二</span>
+            <span class="work-desc">一段简短的介绍，替换成你的项目。</span>
+          </a>
+          <a class="work" href="#">
+            <span class="work-emoji">🌧️</span>
+            <span class="work-title">项目三</span>
+            <span class="work-desc">一段简短的介绍，替换成你的项目。</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="panel">
+      <div class="panel-card">
+        <h2><span class="jp">連絡</span> 联系我</h2>
+        <p>找我聊聊，或者只是打个招呼也好。</p>
+        <div class="socials">
+          <a class="social" href="#" target="_blank" rel="noopener">GitHub</a>
+          <a class="social" href="mailto:you@example.com">Email</a>
+          <a class="social" href="#" target="_blank" rel="noopener">微博</a>
+          <a class="social" href="#" target="_blank" rel="noopener">小红书</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <span>© <span id="year"></span> Grust · 雨还在下</span>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
