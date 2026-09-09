@@ -10,13 +10,11 @@
   <link rel="stylesheet" href="style.css" />
   <style>
     .lost{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0 8vw;position:relative;z-index:5;}
-    .lost .code{margin:0;font-weight:700;line-height:1;font-size:clamp(5rem,22vw,13rem);color:var(--cyan-soft);
-      text-shadow:0 0 40px rgba(84,230,230,.45),0 0 4px rgba(84,230,230,.9);letter-spacing:.05em;}
-    .lost .code .r{color:var(--red);text-shadow:0 0 30px rgba(255,51,85,.6);}
-    .lost p{color:var(--dim);line-height:2;margin:20px 0 34px;letter-spacing:.05em;}
-    .lost .home{color:var(--cyan);text-decoration:none;border:1px solid var(--cyan-dim);padding:11px 20px;
-      letter-spacing:.2em;text-transform:uppercase;font-size:12px;transition:.2s;}
-    .lost .home:hover{border-color:var(--cyan);box-shadow:0 0 18px rgba(84,230,230,.2);}
+    .lost .kicker{margin:0 0 14px;color:var(--dim);font-size:11px;letter-spacing:.3em;text-transform:uppercase;}
+    .lost .code{margin:0;font-weight:400;line-height:1;font-size:clamp(5rem,22vw,13rem);color:var(--ink);letter-spacing:-.02em;}
+    .lost .code .r{color:var(--red);}
+    .lost p{color:var(--dim);line-height:2;margin:22px 0 34px;font-size:13.5px;}
+    #void{opacity:.5;}
   </style>
 </head>
 <body>
@@ -24,12 +22,12 @@
   <canvas id="rain"></canvas>
   <div class="grain"></div>
   <div class="vignette"></div>
-  <div class="scanlines"></div>
+  <div class="frame-lines"></div>
   <div class="lost">
-    <p class="kicker" style="margin:0 0 10px;">［ signal lost in the void ］</p>
+    <p class="kicker">［ signal lost in the void ］</p>
     <h1 class="code">4<span class="r">0</span>4</h1>
     <p>这一页被虚空吞掉了。<br />回到入口，重新抽出属于你的结晶。</p>
-    <a class="home" href="/Grust404web/">← back to void</a>
+    <a class="btn" href="/Grust404web/">← back to void</a>
   </div>
   <script>
   (function(){
@@ -46,14 +44,14 @@
     function vf(ts){if(reduce)return;if(ts-last>55){last=ts;vx.clearRect(0,0,w,h);
       var churn=cols*rows*.06;for(var i=0;i<churn;i++){var g=grid[Math.random()*grid.length|0];g.ch=G[Math.random()*G.length|0];g.a=.08+Math.random()*.55;g.red=Math.random()<.02;}
       for(i=0;i<grid.length;i++){g=grid[i];g.a*=.965;if(g.a<.03)continue;var x=(i%cols)*cell,y=(i/cols|0)*cell;
-        vx.fillStyle=g.red?"rgba(255,51,85,"+g.a+")":"rgba(84,230,230,"+g.a+")";vx.fillText(g.ch,x,y);}}
+        vx.fillStyle=g.red?"rgba(255,51,85,"+g.a+")":"rgba(220,220,220,"+g.a+")";vx.fillText(g.ch,x,y);}}
       requestAnimationFrame(vf);}
     addEventListener("resize",rs);rs();requestAnimationFrame(vf);
     // 雨
     var c=document.getElementById("rain"),x=c.getContext("2d"),rw,rh,d;
     function rrs(){rw=c.width=innerWidth;rh=c.height=innerHeight;d=Array.from({length:Math.min(200,rw/6|0)},mk);}
     function mk(){return{x:Math.random()*rw,y:Math.random()*rh,l:8+Math.random()*16,s:5+Math.random()*7,a:.08+Math.random()*.28};}
-    function f(){x.clearRect(0,0,rw,rh);for(var p of d){x.strokeStyle="rgba(174,247,247,"+p.a+")";x.lineWidth=.8;x.beginPath();x.moveTo(p.x,p.y);x.lineTo(p.x-p.l*.15,p.y+p.l);x.stroke();p.y+=p.s;p.x-=p.s*.15;if(p.y>rh){p.y=-p.l;p.x=Math.random()*rw;}}requestAnimationFrame(f);}
+    function f(){x.clearRect(0,0,rw,rh);for(var p of d){x.strokeStyle="rgba(230,230,230,"+p.a+")";x.lineWidth=.8;x.beginPath();x.moveTo(p.x,p.y);x.lineTo(p.x-p.l*.15,p.y+p.l);x.stroke();p.y+=p.s;p.x-=p.s*.15;if(p.y>rh){p.y=-p.l;p.x=Math.random()*rw;}}requestAnimationFrame(f);}
     addEventListener("resize",rrs);rrs();if(!reduce)f();
   })();
   </script>
