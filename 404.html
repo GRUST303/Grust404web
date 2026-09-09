@@ -3,34 +3,59 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>404 · 雨里走散了</title>
+  <title>404 · lost in the void</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Zhi+Mang+Xing&family=Noto+Serif+SC:wght@300;400&family=Shippori+Mincho:wght@400;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;700&family=Noto+Sans+SC:wght@300;400;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
   <style>
-    .lost { min-height: 100vh; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding: 0 8vw; position: relative; z-index: 4; }
-    .lost .code { font-family:"Zhi Mang Xing", cursive; font-size: clamp(5rem, 20vw, 12rem); color: var(--cream); line-height:1; text-shadow:0 2px 30px rgba(232,168,96,.3); margin:0; }
-    .lost p { color: var(--muted); font-weight:300; line-height:2; margin: 18px 0 32px; }
+    .lost{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0 8vw;position:relative;z-index:5;}
+    .lost .code{margin:0;font-weight:700;line-height:1;font-size:clamp(5rem,22vw,13rem);color:var(--cyan-soft);
+      text-shadow:0 0 40px rgba(84,230,230,.45),0 0 4px rgba(84,230,230,.9);letter-spacing:.05em;}
+    .lost .code .r{color:var(--red);text-shadow:0 0 30px rgba(255,51,85,.6);}
+    .lost p{color:var(--dim);line-height:2;margin:20px 0 34px;letter-spacing:.05em;}
+    .lost .home{color:var(--cyan);text-decoration:none;border:1px solid var(--cyan-dim);padding:11px 20px;
+      letter-spacing:.2em;text-transform:uppercase;font-size:12px;transition:.2s;}
+    .lost .home:hover{border-color:var(--cyan);box-shadow:0 0 18px rgba(84,230,230,.2);}
   </style>
 </head>
 <body>
+  <canvas id="void"></canvas>
   <canvas id="rain"></canvas>
   <div class="grain"></div>
   <div class="vignette"></div>
-  <div class="lamp-glow"></div>
+  <div class="scanlines"></div>
   <div class="lost">
-    <p class="kicker" style="margin:0 0 6px;">page not found</p>
-    <h1 class="code">404</h1>
-    <p>这一页在雨里走散了。<br />要不回小屋，重新煮杯咖啡？</p>
-    <a class="link" href="/">← 回到首页</a>
+    <p class="kicker" style="margin:0 0 10px;">［ signal lost in the void ］</p>
+    <h1 class="code">4<span class="r">0</span>4</h1>
+    <p>这一页被虚空吞掉了。<br />回到入口，重新抽出属于你的结晶。</p>
+    <a class="home" href="/Grust404web/">← back to void</a>
   </div>
   <script>
-  (function(){var c=document.getElementById("rain"),x=c.getContext("2d"),w,h,d;
-  function rs(){w=c.width=innerWidth;h=c.height=innerHeight;d=Array.from({length:Math.min(200,w/6|0)},mk);}
-  function mk(){return{x:Math.random()*w,y:Math.random()*h,l:8+Math.random()*16,s:4+Math.random()*6,a:.1+Math.random()*.3};}
-  function f(){x.clearRect(0,0,w,h);for(var p of d){x.strokeStyle="rgba(240,210,170,"+p.a+")";x.lineWidth=.8;x.beginPath();x.moveTo(p.x,p.y);x.lineTo(p.x-p.l*.15,p.y+p.l);x.stroke();p.y+=p.s;p.x-=p.s*.15;if(p.y>h){p.y=-p.l;p.x=Math.random()*w;}}requestAnimationFrame(f);}
-  addEventListener("resize",rs);rs();f();})();
+  (function(){
+    var reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
+    // 虚空 ASCII 层
+    var vc=document.getElementById("void"),vx=vc.getContext("2d");
+    var G="アイウエオカキクケコ01#$%&/\\<>*+=結晶虚空王之手◆◇◈✦░▒▓".split("");
+    var w,h,cols,rows,cell,grid,dpr;
+    function rs(){dpr=Math.min(devicePixelRatio||1,2);w=vc.width=innerWidth*dpr;h=vc.height=innerHeight*dpr;
+      vc.style.width=innerWidth+"px";vc.style.height=innerHeight+"px";cell=18*dpr|0;cols=Math.ceil(w/cell);rows=Math.ceil(h/cell);
+      grid=new Array(cols*rows).fill(0).map(function(){return{ch:G[Math.random()*G.length|0],a:Math.random()*.25,red:Math.random()<.02};});
+      vx.font=(cell*.82|0)+'px "JetBrains Mono",monospace';vx.textBaseline="top";}
+    var last=0;
+    function vf(ts){if(reduce)return;if(ts-last>55){last=ts;vx.clearRect(0,0,w,h);
+      var churn=cols*rows*.06;for(var i=0;i<churn;i++){var g=grid[Math.random()*grid.length|0];g.ch=G[Math.random()*G.length|0];g.a=.08+Math.random()*.55;g.red=Math.random()<.02;}
+      for(i=0;i<grid.length;i++){g=grid[i];g.a*=.965;if(g.a<.03)continue;var x=(i%cols)*cell,y=(i/cols|0)*cell;
+        vx.fillStyle=g.red?"rgba(255,51,85,"+g.a+")":"rgba(84,230,230,"+g.a+")";vx.fillText(g.ch,x,y);}}
+      requestAnimationFrame(vf);}
+    addEventListener("resize",rs);rs();requestAnimationFrame(vf);
+    // 雨
+    var c=document.getElementById("rain"),x=c.getContext("2d"),rw,rh,d;
+    function rrs(){rw=c.width=innerWidth;rh=c.height=innerHeight;d=Array.from({length:Math.min(200,rw/6|0)},mk);}
+    function mk(){return{x:Math.random()*rw,y:Math.random()*rh,l:8+Math.random()*16,s:5+Math.random()*7,a:.08+Math.random()*.28};}
+    function f(){x.clearRect(0,0,rw,rh);for(var p of d){x.strokeStyle="rgba(174,247,247,"+p.a+")";x.lineWidth=.8;x.beginPath();x.moveTo(p.x,p.y);x.lineTo(p.x-p.l*.15,p.y+p.l);x.stroke();p.y+=p.s;p.x-=p.s*.15;if(p.y>rh){p.y=-p.l;p.x=Math.random()*rw;}}requestAnimationFrame(f);}
+    addEventListener("resize",rrs);rrs();if(!reduce)f();
+  })();
   </script>
 </body>
 </html>

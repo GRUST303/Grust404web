@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Grust · void</title>
+<style>
+  :root{
+    --bg:#05070a;
+    --bg2:#0a0f16;
+    --ink:#c9d6e5;
+    --dim:#5b6b7d;
+    --cyan:#4fe3 e5;
+    --cyan:#54e6e6;
+    --cyan-dim:#1c6d70;
+    --red:#ff3355;
+    --line:rgba(84,230,230,0.18);
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;height:100%;}
+  body{
+    background:
+      radial-gradient(1200px 800px at 70% -10%, rgba(84,230,230,0.06), transparent 60%),
+      radial-gradient(900px 700px at 10% 110%, rgba(255,51,85,0.05), transparent 55%),
+      linear-gradient(180deg,var(--bg2),var(--bg));
+    color:var(--ink);
+    font-family:"SFMono-Regular",Menlo,Consolas,"Liberation Mono",monospace;
+    min-height:100vh;
+    overflow-x:hidden;
+  }
+  /* faint scanline grid */
+  body::before{
+    content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
+    background-image:linear-gradient(rgba(84,230,230,0.035) 1px,transparent 1px);
+    background-size:100% 3px;mix-blend-mode:overlay;opacity:.5;
+  }
+  .wrap{position:relative;z-index:1;max-width:1000px;margin:0 auto;padding:34px 26px 80px;}
+  .top{display:flex;justify-content:space-between;align-items:center;font-size:12px;letter-spacing:.3em;color:var(--dim);text-transform:uppercase;}
+  .top .dot{color:var(--cyan);}
+  .hero{display:grid;grid-template-columns:1.15fr .85fr;gap:26px;align-items:center;margin-top:60px;}
+  pre.ascii{
+    margin:0;font-size:12px;line-height:1.15;color:var(--cyan);
+    text-shadow:0 0 14px rgba(84,230,230,0.35);white-space:pre;
+  }
+  .lead h1{
+    font-size:15px;letter-spacing:.55em;color:var(--dim);font-weight:400;margin:0 0 18px;text-transform:uppercase;
+  }
+  .lead .big{
+    font-size:44px;line-height:1.15;letter-spacing:.02em;color:var(--ink);margin:0 0 20px;font-weight:400;
+  }
+  .lead .big em{color:var(--cyan);font-style:normal;}
+  .lead p{color:var(--dim);font-size:13px;line-height:1.9;letter-spacing:.05em;max-width:36ch;}
+  .crystal{filter:drop-shadow(0 0 18px rgba(84,230,230,0.4));}
+  .crystal .core{fill:none;stroke:var(--cyan);stroke-width:1.4;}
+  .crystal .r{fill:none;stroke:var(--red);stroke-width:1;opacity:.8;}
+  .crystal .f{fill:rgba(84,230,230,0.05);}
+  .rule{margin:56px 0;border:0;border-top:1px dashed var(--line);}
+  .glyphs{display:flex;gap:30px;font-size:26px;color:var(--cyan-dim);justify-content:center;}
+  .glyphs span:nth-child(2){color:var(--cyan);}
+  .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:40px;}
+  .card{border:1px solid var(--line);padding:20px 18px;background:rgba(84,230,230,0.02);position:relative;}
+  .card::before{content:"◆";position:absolute;top:-9px;left:16px;background:var(--bg);padding:0 6px;color:var(--cyan);font-size:12px;}
+  .card h3{margin:6px 0 10px;font-size:13px;letter-spacing:.25em;color:var(--ink);font-weight:400;text-transform:uppercase;}
+  .card p{margin:0;font-size:12px;line-height:1.8;color:var(--dim);}
+  .idx{font-size:11px;color:var(--cyan-dim);letter-spacing:.3em;}
+  .footer{margin-top:60px;font-size:11px;letter-spacing:.3em;color:var(--dim);text-align:center;text-transform:uppercase;}
+  @media(max-width:720px){.hero{grid-template-columns:1fr;}.cards{grid-template-columns:1fr;}.lead .big{font-size:34px;}}
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="top">
+      <span class="dot">◈</span> GRUST // VOID.GENOME
+      <span>404_WEB &nbsp;<span class="dot">●</span> online</span>
+    </div>
+
+    <section class="hero">
+      <pre class="ascii">
+   ____                 _   
+  / ___|_ __ _   _ ___| |_ 
+ | |  _| '__| | | / __| __|
+ | |_| | |  | |_| \__ \ |_ 
+  \____|_|   \__,_|___/\__|
+
+  &gt;_ rainless. codeless. void.
+      </pre>
+      <div class="lead">
+        <h1>void genome</h1>
+        <div class="big">从虚空里<br/>抽出<em>结晶</em>。</div>
+        <p>ascii-magic · 极简 · 罪恶王冠结晶符号。以单色线框、等宽字体与几何晶体构建的个人空间。</p>
+      </div>
+    </section>
+
+    <div style="display:flex;justify-content:center;margin-top:10px;">
+      <svg class="crystal" width="220" height="220" viewBox="0 0 200 200">
+        <polygon class="f" points="100,18 150,60 132,150 68,150 50,60"/>
+        <polygon class="core" points="100,18 150,60 132,150 68,150 50,60"/>
+        <polygon class="core" points="100,50 128,74 118,132 82,132 72,74"/>
+        <line class="core" x1="100" y1="18" x2="100" y2="50"/>
+        <line class="core" x1="150" y1="60" x2="128" y2="74"/>
+        <line class="core" x1="50" y1="60" x2="72" y2="74"/>
+        <line class="core" x1="132" y1="150" x2="118" y2="132"/>
+        <line class="core" x1="68" y1="150" x2="82" y2="132"/>
+        <polygon class="r" points="100,68 112,88 100,112 88,88"/>
+        <circle class="r" cx="100" cy="90" r="3"/>
+      </svg>
+    </div>
+
+    <hr class="rule"/>
+    <div class="glyphs"><span>◇</span><span>◈</span><span>◆</span><span>⬡</span><span>✦</span></div>
+
+    <div class="cards">
+      <div class="card"><div class="idx">01</div><h3>works</h3><p>作品以卡片晶格排列，hover 时线框亮起。</p></div>
+      <div class="card"><div class="idx">02</div><h3>about</h3><p>等宽字体写就的自述，像一段终端输出。</p></div>
+      <div class="card"><div class="idx">03</div><h3>contact</h3><p>&gt; github &nbsp; &gt; mail &nbsp; &gt; ...</p></div>
+    </div>
+
+    <div class="footer">&copy; grust — the void whispers back</div>
+  </div>
+</body>
+</html>
